@@ -1,0 +1,44 @@
+//const val sep = ","
+//const val cardEnd = "|"
+//
+////shape
+//class S {
+//    companion object{
+//        const val S = "S" //"Squiggle"
+//        const val O = "O" //"Oval"
+//        const val D = "D" //"Diamond"
+//    }
+//}
+//
+////fill
+//class F {
+//    companion object{
+//        const val L = "L" //"Open"
+//        const val S = "S" //"Shaded"
+//        const val F = "F" //Full"
+//    }
+//}
+//
+////color
+//class C {
+//    companion object{
+//        const val R = "R" //"Red"
+//        const val G = "G" //"Green"
+//        const val B = "B" //"Blue"
+//    }
+//}
+//
+////number of shapes
+//class N {
+//    companion object{
+//        const val `1` = "1" //"One"
+//        const val `2` = "2" //"Two"
+//        const val `3` = "3" //Three"
+//    }
+//}
+//
+//data class Card(val shape: S, val color: C, val fill: F, val number: N)
+//
+//fun toCardStr(shape: S, color: C, fill: F, number: N): String {
+//   return listOf(shape, color, fill, number).joinToString { sep } + cardEnd
+//}
