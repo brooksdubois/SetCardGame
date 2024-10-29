@@ -114,6 +114,7 @@ val fullOval = """
  '-___-' 
 """
 fun emptySpace() = "\n \n \n \n \n \n \n \n "
+fun emptyLongSpace() = "\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  "
 val leftCard = combineVertically(noLog = true, edgeCard, emptySpace(), emptySpace())
 val rightCard = combineVertically(noLog = true, emptySpace(), emptySpace(), edgeCard)
 val redColor = "RED"; val greenColor = "GREEN"; val blueColor = "BLUE"
@@ -160,16 +161,9 @@ fun drawCard3(): String {
         noLog = true,
         leftCard,
         emptySpace(),
-        emptySpace(),
-        emptySpace(),
-        emptySpace(),
-        emptySpace(),
         fullOval,
         fullOval,
-        emptySpace(),
-        emptySpace(),
-        emptySpace(),
-        emptySpace(),
+        fullOval,
         emptySpace(),
         rightCard
     )
@@ -179,10 +173,25 @@ $combineVertical
 $bottomCard
 """
 }
+fun dealRow() = combineVertically(
+    true,
+    drawCard(),
+    emptyLongSpace(),
+    drawCard2(),
+    emptyLongSpace(),
+    drawCard3()
+)
+
+fun dealPlayableCards() = buildString {
+    append(dealRow())
+    appendLine()
+    append(dealRow())
+    appendLine()
+    append(dealRow())
+    appendLine()
+}
 
 
 fun main(){
-    print(drawCard())
-    print(drawCard2())
-    print(drawCard3())
+    print(dealPlayableCards())
 }
