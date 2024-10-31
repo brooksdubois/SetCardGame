@@ -25,123 +25,201 @@ fun combineVertically(noLog: Boolean? = false, vararg strings: String): String {
     }
 }
 
-fun getTopCard(c: ColorCode = WHITE) = """$c _______________________________ 
-$c*                               *"""
-fun getBottomCard(c: ColorCode = WHITE) = "$c*_______________________________*"
-fun getEdgeCard(c: ColorCode = WHITE) = """
-$c*
-$c*
-$c*
-$c*
-$c*
-$c*
-$c*
-"""
+const val BG_COLOR = WHITE
 
-fun getEmptySquiggle(c: ColorCode) = """
-$c  .''.   
-$c  \   \  
-$c  /   /  
-$c /   \   
-$c  \   \  
-$c  /   /  
-$c  '..'   
-"""
 
-fun getMedSquiggle(c: ColorCode) = """
-$c  .'''.  
-$c  \. .\  
-$c  . . .  
-$c . . .   
-$c  . . .  
-$c  /. ./  
-$c  '..'   
-"""
-
-fun getFullSquiggle(c: ColorCode) = """
-$c  .'''. 
-$c  \===\ 
-$c  /===/ 
-$c /===\  
-$c  \===\ 
-$c  /===/ 
-$c  '..'  
-"""
-
-fun getEmptyDiamond(c: ColorCode) = """
-$c    A    
-$c   / \   
-$c  /   \  
-$c <     > 
-$c  \   /  
-$c   \ /   
-$c    V    
-"""
-
-fun getMedDiamond(c: ColorCode) = """
-$c    A    
-$c   . .   
-$c  . . .  
-$c < . . > 
-$c  . . .  
-$c   . .   
-$c    V    
-"""
-
-fun getFullDiamond(c: ColorCode) = """
-$c    A    
-$c   /=\   
-$c  /===\  
-$c < === > 
-$c  \===/  
-$c   \=/   
-$c    V    
-"""
-
-fun getEmptyOval(c: ColorCode) = """
-$c .-'''-. 
-$c |     | 
-$c |     | 
-$c |     | 
-$c |     | 
-$c |     | 
-$c '-___-' 
-"""
-
-fun getMedOval(c: ColorCode) = """
-$c .-'''-. 
-$c . . . . 
-$c . . . . 
-$c . . . . 
-$c . . . . 
-$c . . . . 
-$c '-___-' 
-"""
-
-fun getFullOval(c: ColorCode) = """
-$c .-'''-. 
-$c |=====| 
-$c |=====| 
-$c |=====| 
-$c |=====| 
-$c |=====| 
-$c '-___-' 
-"""
-fun emptySpace() = "\n \n \n \n \n \n \n \n "
+fun emptySpace() = "\n`\n`\n`\n`\n`\n`\n`\n"
 fun emptyLongSpace() = "\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  "
-val leftCard = combineVertically(noLog = true, getEdgeCard(), emptySpace(), emptySpace())
-val rightCard = combineVertically(noLog = true, emptySpace(), emptySpace(), getEdgeCard())
 
+val leftCard = combineVertically(noLog = true, getEdgeCard(), emptySpace(), emptySpace(), emptySpace())
+val rightCard = combineVertically(noLog = true, emptySpace(),  emptySpace(), emptySpace(), getEdgeCard())
 
-//SAMPLING CODE
+fun getTopCard(c: ColorCode = BG_COLOR) = """$c _________________________________ 
+$c*                                 *"""
+fun getBottomCard(c: ColorCode = BG_COLOR) = "$c*_________________________________*"
+fun getEdgeCard(c: ColorCode = BG_COLOR) = """
+$c!
+$c!
+$c!
+$c!
+$c!
+$c!
+$c!
+"""
+
+fun getEmptySquiggle(c: ColorCode, e: ColorCode = BG_COLOR) = """
+$c  .''.   $e
+$c  \   \  $e
+$c  /   /  $e
+$c /   \   $e
+$c  \   \  $e
+$c  /   /  $e
+$c  '..'   $e
+"""
+fun getMedSquiggle(c: ColorCode, e: ColorCode = BG_COLOR) = """
+$c  .'''.  $e
+$c  \. .\  $e
+$c  . . .  $e
+$c . . .   $e
+$c  . . .  $e
+$c  /. ./  $e
+$c  '..'   $e
+"""
+fun getFullSquiggle(c: ColorCode, e: ColorCode = BG_COLOR) = """
+$c  .'''.  $e
+$c  \===\  $e
+$c  /===/  $e
+$c /===\   $e
+$c  \===\  $e
+$c  /===/  $e
+$c  '..'   $e
+"""
+fun getEmptyDiamond(c: ColorCode, e: ColorCode = BG_COLOR) = """
+$c    A    $e
+$c   / \   $e
+$c  /   \  $e
+$c <     > $e
+$c  \   /  $e
+$c   \ /   $e
+$c    V    $e
+"""
+fun getMedDiamond(c: ColorCode, e: ColorCode = BG_COLOR) = """
+$c    A    $e
+$c   . .   $e
+$c  . . .  $e
+$c < . . > $e
+$c  . . .  $e
+$c   . .   $e
+$c    V    $e
+"""
+fun getFullDiamond(c: ColorCode, e: ColorCode = BG_COLOR) = """
+$c    A    $e
+$c   /=\   $e
+$c  /===\  $e
+$c < === > $e
+$c  \===/  $e
+$c   \=/   $e
+$c    V    $e
+"""
+fun getEmptyOval(c: ColorCode, e: ColorCode = BG_COLOR) = """
+$c .-'''-. $e
+$c |     | $e
+$c |     | $e
+$c |     | $e
+$c |     | $e
+$c |     | $e
+$c '-___-' $e
+"""
+fun getMedOval(c: ColorCode, e: ColorCode = BG_COLOR) = """
+$c .-'''-. $e
+$c . . . . $e
+$c . . . . $e
+$c . . . . $e
+$c . . . . $e
+$c . . . . $e
+$c '-___-' $e
+"""
+fun getFullOval(c: ColorCode, e: ColorCode = BG_COLOR) = """
+$c .-'''-. $e
+$c |=====| $e
+$c |=====| $e
+$c |=====| $e
+$c |=====| $e
+$c |=====| $e
+$c '-___-' $e
+"""
+
+fun drawSquiggleCard1(c:ColorCode): String {
+    val combineVertical = combineVertically(
+        noLog = true,
+        leftCard,
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        getEmptySquiggle(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        rightCard
+    )
+    return """
+${getTopCard()}
+$combineVertical
+${getBottomCard()}
+"""
+}
+fun drawSquiggleCard2(c:ColorCode): String {
+    val combineVertical = combineVertically(
+        noLog = true,
+        leftCard,
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        getMedSquiggle(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        getMedSquiggle(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        rightCard
+    )
+    return """
+${getTopCard()}
+$combineVertical
+${getBottomCard()}
+"""
+}
 fun drawSquiggleCard3(c:ColorCode): String {
     val combineVertical = combineVertically(
         noLog = true,
         leftCard,
+        getFullSquiggle(c),
+        getFullSquiggle(c),
+        getFullSquiggle(c),
+        rightCard
+    )
+    return """
+${getTopCard()}
+$combineVertical
+${getBottomCard()}
+"""
+}
+fun drawDiamondCard1(c:ColorCode): String {
+    val combineVertical = combineVertically(
+        noLog = true,
+        leftCard,
         emptySpace(),
-        getEmptySquiggle(c),
-        getEmptySquiggle(c),
-        getEmptySquiggle(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        getEmptyDiamond(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
         emptySpace(),
         rightCard
     )
@@ -151,16 +229,36 @@ $combineVertical
 ${getBottomCard()}
 """
 }
-
+fun drawDiamondCard2(c:ColorCode): String {
+    val combineVertical = combineVertically(
+        noLog = true,
+        leftCard,
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        getMedDiamond(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        getMedDiamond(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        rightCard
+    )
+    return """
+${getTopCard()}
+$combineVertical
+${getBottomCard()}
+"""
+}
 fun drawDiamondCard3(c:ColorCode): String {
     val combineVertical = combineVertically(
         noLog = true,
         leftCard,
-        emptySpace(),
-        getMedDiamond(c),
-        getMedDiamond(c),
-        getMedDiamond(c),
-        emptySpace(),
+        getFullDiamond(c),
+        getFullDiamond(c),
+        getFullDiamond(c),
         rightCard
     )
     return """
@@ -169,15 +267,28 @@ $combineVertical
 ${getBottomCard()}
 """
 }
-
-fun drawOvalCard3(c: ColorCode): String {
+fun drawOvalCard1(c: ColorCode): String {
     val combineVertical = combineVertically(
         noLog = true,
         leftCard,
         emptySpace(),
-        getFullOval(c),
-        getFullOval(c),
-        getFullOval(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        getEmptyOval(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
         emptySpace(),
         rightCard
     )
@@ -187,31 +298,68 @@ $combineVertical
 ${getBottomCard()}
 """
 }
+fun drawOvalCard2(c: ColorCode): String {
+    val combineVertical = combineVertically(
+        noLog = true,
+        leftCard,
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        getMedOval(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        getMedOval(c),
+        emptySpace(),
+        emptySpace(),
+        emptySpace(),
+        rightCard
+    )
+    return """
+${getTopCard()}
+$combineVertical
+${getBottomCard()}
+"""
+}
+fun drawOvalCard3(c: ColorCode): String {
+    val combineVertical = combineVertically(
+        noLog = true,
+        leftCard,
+        getFullOval(c),
+        getFullOval(c),
+        getFullOval(c),
+        rightCard
+    )
+    return """
+${getTopCard()}
+$combineVertical
+${getBottomCard()}
+"""
+}
+
 fun dealRow1() = combineVertically(
     true,
-    drawSquiggleCard3(RED),
+    drawSquiggleCard1(RED),
     emptyLongSpace(),
-    drawDiamondCard3(RED),
+    drawDiamondCard1(GREEN),
     emptyLongSpace(),
-    drawOvalCard3(RED)
+    drawOvalCard1(BLUE)
 )
-
 fun dealRow2() = combineVertically(
+    true,
+    drawSquiggleCard2(BLUE),
+    emptyLongSpace(),
+    drawDiamondCard2(RED),
+    emptyLongSpace(),
+    drawOvalCard2(GREEN)
+)
+fun dealRow3() = combineVertically(
     true,
     drawSquiggleCard3(GREEN),
     emptyLongSpace(),
-    drawDiamondCard3(GREEN),
-    emptyLongSpace(),
-    drawOvalCard3(GREEN)
-)
-
-fun dealRow3() = combineVertically(
-    true,
-    drawSquiggleCard3(BLUE),
-    emptyLongSpace(),
     drawDiamondCard3(BLUE),
     emptyLongSpace(),
-    drawOvalCard3(BLUE)
+    drawOvalCard3(RED)
 )
 
 fun dealPlayableCards() = buildString {
