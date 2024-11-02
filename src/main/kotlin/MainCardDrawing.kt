@@ -30,13 +30,17 @@ fun combineVertically(noLog: Boolean? = false, vararg strings: String): String {
 
 const val BG_COLOR = WHITE
 
+
+typealias AsciiShape = String
+typealias AsciiCard = String
+
 typealias FillCode = String
 object FillCodes {
     const val EMPTY: FillCode = " "
     const val MED: FillCode = "."
     const val FULL: FillCode = "="
 }
-typealias AsciiShape = String
+
 fun emptySpace() = "\n`\n`\n`\n`\n`\n`\n`\n"
 fun emptyLongSpace() = "\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  "
 
@@ -85,29 +89,7 @@ $c |$f$f$f$f$f| $e
 $c |$f$f$f$f$f| $e
 $c '-___-' $e
 """
-fun getShape(shape: Shape, colorCode: ColorCode, fillCode: FillCode) =
-    when (shape) {
-        Shapes.Squiggle -> getSquiggle(colorCode, fillCode)
-        Shapes.Diamond -> getDiamond(colorCode, fillCode)
-        Shapes.Oval -> getOval(colorCode, fillCode)
-        else -> throw Error("No matching shape code")
-    }
 
-fun getColorCode(color: Color) =
-    when(color){
-        Colors.Red -> RED
-        Colors.Blue -> BLUE
-        Colors.Green -> GREEN
-        else -> throw Error("No matching color code")
-    }
-
-fun getFillCode(fill: Fill) =
-    when(fill){
-        Fills.Full -> FULL
-        Fills.Light -> EMPTY
-        Fills.Shaded -> MED
-        else -> throw Error("No matching color code")
-    }
 fun drawCard1(shape: Shape, color: Color, fill: Fill): String {
     val colorCode = getColorCode(color)
     val fillCode = getFillCode(fill)
@@ -185,43 +167,59 @@ ${getBottomCard()}
 """
 }
 
-fun dealRow1() = combineVertically(
+fun getShape(shape: Shape, colorCode: ColorCode, fillCode: FillCode) =
+    when (shape) {
+        Shapes.Squiggle -> getSquiggle(colorCode, fillCode)
+        Shapes.Diamond -> getDiamond(colorCode, fillCode)
+        Shapes.Oval -> getOval(colorCode, fillCode)
+        else -> throw Error("No matching shape code")
+    }
+
+fun getColorCode(color: Color) =
+    when(color){
+        Colors.Red -> RED
+        Colors.Blue -> BLUE
+        Colors.Green -> GREEN
+        else -> throw Error("No matching color code")
+    }
+
+fun getFillCode(fill: Fill) =
+    when(fill){
+        Fills.Full -> FULL
+        Fills.Light -> EMPTY
+        Fills.Shaded -> MED
+        else -> throw Error("No matching color code")
+    }
+
+fun getAsciiCard(card: Card): AsciiCard =
+    when(card.count){
+        Counts.`1` -> drawCard1(card.shape, card.color, card.fill)
+        Counts.`2` -> drawCard2(card.shape, card.color, card.fill)
+        Counts.`3` -> drawCard3(card.shape, card.color, card.fill)
+        else -> throw Error("No matching shape count")
+    }
+
+
+
+fun dealRow(card1: AsciiCard, card2: AsciiCard, card3: AsciiCard) = combineVertically(
     true,
-    drawCard1(Shapes.Oval, Colors.Red, Fills.Light),
+    card1,
     emptyLongSpace(),
-    drawCard1(Shapes.Squiggle, Colors.Green, Fills.Shaded),
+    card2,
     emptyLongSpace(),
-    drawCard1(Shapes.Diamond, Colors.Blue, Fills.Full),
+    card3
 )
 
-fun dealRow2() = combineVertically(
-    true,
-    drawCard2(Shapes.Oval, Colors.Blue, Fills.Light),
-    emptyLongSpace(),
-    drawCard2(Shapes.Squiggle, Colors.Green, Fills.Shaded),
-    emptyLongSpace(),
-    drawCard2(Shapes.Diamond, Colors.Red, Fills.Full),
-)
-
-fun dealRow3() = combineVertically(
-    true,
-    drawCard3(Shapes.Oval, Colors.Green, Fills.Light),
-    emptyLongSpace(),
-    drawCard3(Shapes.Squiggle, Colors.Blue, Fills.Shaded),
-    emptyLongSpace(),
-    drawCard3(Shapes.Diamond, Colors.Red, Fills.Full),
-)
-
-
-fun dealPlayableCards() = buildString {
-    append(dealRow1())
+fun dealPlayableCards(cards: List<AsciiCard>) = buildString {
+    append(dealRow(cards[0], cards[1], cards[2]))
     appendLine()
-    append(dealRow2())
+    append(dealRow(cards[3], cards[4], cards[5]))
     appendLine()
-    append(dealRow3())
+    append(dealRow(cards[6], cards[7], cards[8]))
     appendLine()
 }
 
 fun main(){
-    print(dealPlayableCards())
+    val dealCards = createHashMap().shuffleAndDeal12().map{ getAsciiCard(it.value.first) }
+    print(dealPlayableCards(dealCards))
 }
