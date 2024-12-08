@@ -15,7 +15,7 @@ fun main(){
     )
 
     println("Welcome to the Set Game")
-    val grid = GridAccessor(rows = 3, cols = 3)
+    val grid = GridAccessor(rows = 3, cols = 4)
 
     while (true) {
         println("Enter 3 cells (ie. 'a1 b1 c1')")

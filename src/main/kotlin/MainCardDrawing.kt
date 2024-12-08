@@ -201,21 +201,23 @@ fun getAsciiCard(card: Card): AsciiCard =
 
 
 
-fun dealRow(card1: AsciiCard, card2: AsciiCard, card3: AsciiCard) = combineVertically(
+fun dealRow(card1: AsciiCard, card2: AsciiCard, card3: AsciiCard, card4: AsciiCard) = combineVertically(
     true,
     card1,
     emptyLongSpace(),
     card2,
     emptyLongSpace(),
-    card3
+    card3,
+    emptyLongSpace(),
+    card4
 )
 
 fun dealPlayableCards(cards: List<AsciiCard>) = buildString {
-    append(dealRow(cards[0], cards[1], cards[2]))
+    append(dealRow(cards[0], cards[1], cards[2], cards[3]))
     appendLine()
-    append(dealRow(cards[3], cards[4], cards[5]))
+    append(dealRow(cards[4], cards[5], cards[6], cards[7]))
     appendLine()
-    append(dealRow(cards[6], cards[7], cards[8]))
+    append(dealRow(cards[8], cards[9], cards[10], cards[11]))
     appendLine()
 }
 
