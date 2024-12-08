@@ -220,6 +220,14 @@ fun dealPlayableCards(cards: List<AsciiCard>) = buildString {
 }
 
 fun main(){
-    val dealCards = createHashMap().shuffleAndDeal12().map{ getAsciiCard(it.value.first) }
-    print(dealPlayableCards(dealCards))
+    val cardsDealt = createHashMap()
+        .shuffleAndDeal12()
+    
+    val outputString = dealPlayableCards(
+        cardsDealt.map{
+            val card = it.value.first
+            getAsciiCard(card)
+        }
+    )
+    print(outputString)
 }
