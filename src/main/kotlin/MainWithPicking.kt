@@ -2,8 +2,9 @@ package org.brooks
 
 
 fun main(){
-    val cardsDealt = createHashMap()
-        .shuffleAndDeal12()
+    val cardsHash = createHashMap()
+    val cards = cardsHash.entries.shuffled().toMutableList()
+    var cardsDealt = cards.take(12)
 
     print(
         dealPlayableCards(
@@ -43,7 +44,26 @@ fun main(){
                 val card3 = cardsDealt[card3index].value
                 println("""${card1.second} |  ${card2.second}  |  ${card3.second} """)
                 println("Are the selected cards a set?")
-                println(areCardsASet(card1.first, card2.first, card3.first).toString())
+                val setEval = areCardsASet(card1.first, card2.first, card3.first)
+                println(if(setEval) "YES" else "NO")
+                if(setEval){
+                    cards[card1index] = cards[12]
+                    cards.removeAt(12)
+                    cards[card2index] = cards[13]
+                    cards.removeAt(13)
+                    cards[card3index] = cards[14]
+                    cards.removeAt(14)
+
+                    cardsDealt = cards.take(12)
+                    print(
+                        dealPlayableCards(
+                            cardsDealt.map{
+                                val card = it.value.first
+                                getAsciiCard(card)
+                            }
+                        )
+                    )
+                }
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }

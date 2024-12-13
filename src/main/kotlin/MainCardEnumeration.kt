@@ -90,10 +90,13 @@ fun createHashMap(): CardHashMap {
 }
 
 fun CardHashMap.shuffleAndDeal12() = this.entries.shuffled().take(12)
+fun CardHashMap.shuffle() = this.entries.shuffled()
+
 
 
 fun main() {
-    val dealCards = createHashMap().shuffleAndDeal12()
+    val dealCards = createHashMap().shuffle().take(12)
+
     repeat(3){outerX ->
         repeat(4){innerY ->
             print(dealCards[outerX * 4 + innerY].value.second)
