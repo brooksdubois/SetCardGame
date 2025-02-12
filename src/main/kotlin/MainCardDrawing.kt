@@ -199,8 +199,6 @@ fun getAsciiCard(card: Card): AsciiCard =
         else -> throw Error("No matching shape count")
     }
 
-
-
 fun dealRow(card1: AsciiCard, card2: AsciiCard, card3: AsciiCard, card4: AsciiCard) = combineVertically(
     true,
     card1,

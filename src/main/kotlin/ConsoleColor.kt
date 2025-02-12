@@ -11,7 +11,6 @@ object ConsoleColor {
     const val PURPLE: ColorCode = "\u001B[35m"
     const val CYAN: ColorCode = "\u001B[36m"
     const val WHITE: ColorCode = "\u001B[37m"
-
 }
 
 //

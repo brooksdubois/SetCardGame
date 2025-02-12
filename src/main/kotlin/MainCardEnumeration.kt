@@ -1,10 +1,15 @@
 package org.brooks
 
-const val sep = ","
-const val endLine = "|"
-
 typealias CardFaceValue = String
+
 typealias Shape = CardFaceValue
+typealias Count = CardFaceValue
+typealias Fill = CardFaceValue
+typealias Color = CardFaceValue
+
+data class Card(val shape: Shape, val color: Color, val fill: Fill, val count: Count)
+
+
 object Shapes {
     const val Squiggle: Shape = "S"
     const val Oval: Shape = "O"
@@ -19,11 +24,10 @@ object Shapes {
         input == Diamond
 }
 
-typealias Fill = CardFaceValue
 object Fills {
-    const val Light:Fill = "L"
-    const val Shaded:Fill = "S"
-    const val Full:Fill = "F"
+    const val Light: Fill = "L"
+    const val Shaded: Fill = "S"
+    const val Full: Fill = "F"
 
     fun getFills(): List<CardFaceValue>
     = listOf(Full, Shaded, Light)
@@ -35,11 +39,10 @@ object Fills {
 
 }
 
-typealias Color = CardFaceValue
 object Colors {
-    const val Red:Color = "R"
-    const val Green:Color = "G"
-    const val Blue:Color = "B"
+    const val Red: Color = "R"
+    const val Green: Color = "G"
+    const val Blue: Color = "B"
 
     fun getColors(): List<CardFaceValue>
             = listOf(Red, Green, Blue)
@@ -50,7 +53,6 @@ object Colors {
         input == Blue
 }
 
-typealias Count = CardFaceValue
 object Counts {
     const val `1`: Count = "1"
     const val `2`: Count = "2"
@@ -64,10 +66,11 @@ object Counts {
         input == Counts.`3`
 }
 
-data class Card(val shape: Shape, val color: Color, val fill: Fill, val count: Count)
+const val sep = ","
+const val endLine = "|"
 
 typealias CardSerialized = String
-fun Card.toCardStr():CardSerialized =
+fun Card.toCardStr(): CardSerialized =
     "$endLine$count$sep$color$sep$fill$sep$shape$endLine"
 
 typealias CardIndex = Int
